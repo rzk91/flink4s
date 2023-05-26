@@ -1,8 +1,6 @@
 val scala213Version = "2.13.8"
 val scala3Version   = "3.1.2"
 
-val supportedScalaVersions = List(scala3Version)
-
 lazy val mavenSnapshots =
   "apache.snapshots" at "https://repository.apache.org/content/groups/snapshots"
 
@@ -18,11 +16,11 @@ val flinkLibs = Seq(
 )
 
 val otherLibs = Seq(
-  "org.typelevel" %% "cats-core" % "2.7.0"
+  "org.typelevel" %% "cats-core" % "2.9.0"
 )
 
 val testingLibs = Seq(
-  "org.scalatest" %% "scalatest" % "3.2.11" % Test
+  "org.scalatest" %% "scalatest" % "3.2.15" % Test
 )
 
 lazy val root = project
@@ -36,29 +34,19 @@ lazy val root = project
     Test / parallelExecution := false
   )
 
-import ReleaseTransformations._
+import ReleaseTransformations.*
 
 lazy val publishingSettings = Seq(
-  organization         := "com.ariskk",
-  organizationName     := "ariskk",
-  organizationHomepage := Some(url("http://ariskk.com/")),
+  organization         := "com.rzk91",
+  organizationName     := "rzk91",
   scmInfo := Some(
     ScmInfo(
-      url("https://github.com/ariskk/flink4s"),
-      "scm:git@github.com:ariskk/flink4s.git"
+      url("https://github.com/rzk91/flink4s"),
+      "scm:git@github.com:rzk91/flink4s.git"
     )
   ),
-  developers := List(
-    Developer(
-      id = "ariskk",
-      name = "Aris Koliopoulos",
-      email = "aris@ariskk.com",
-      url = url("http://ariskk.com")
-    )
-  ),
-  description := "Scala 3 wrapper for Apache Flink",
-  licenses    := List("MIT" -> new URL("http://opensource.org/licenses/MIT")),
-  homepage    := Some(url("https://github.com/ariskk/flink4s")),
+  description := "Scala 2.13/3 wrapper for Apache Flink",
+  homepage    := Some(url("https://github.com/rzk91/flink4s")),
   publishTo := {
     val nexus = "https://oss.sonatype.org/"
     if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
